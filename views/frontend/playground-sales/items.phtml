@@ -1,0 +1,76 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th><?php echo $this->translate('Name'); ?></th>
+            <th><?php echo $this->translate('Sku'); ?></th>
+            <th><?php echo $this->translate('Price'); ?></th>
+            <th><?php echo $this->translate('Quantity'); ?></th>
+            <th><?php echo $this->translate('Totals'); ?></th>
+            <?php if ( $order->getState() == 'new' ) { ?><th><?php echo $this->translate('Actions'); ?></th><?php } ?>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach( $order->getItems() as $item ) { ?>
+        <tr>
+            <td><?php echo $item->getName(); ?></td>
+            <td><?php echo $item->getSku(); ?></td>
+            <td><?php echo $this->currencyFormat( $item->getPrice(), $item->getCurrency() ); ?></td>
+            <td><?php echo $item->getQuantity(); ?></td>
+            <td><?php echo $this->currencyFormat( $item->getRowTotal(), $item->getCurrency() ); ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td><a href="<?php echo $this->url('frontend/checkout/remove',array('id'=>$item->getId(),'channel'=>$channel)); ?>"><?php echo $this->translate('Delete'); ?></a></td><?php } ?>
+        </tr>
+<?php }?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Sub total'); ?></th>
+            <td><?php echo $this->currencyFormat( $order->getSubTotal(), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php if ( $order->getDiscountAmount() < 0 ) { ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Discount'); ?></th>
+            <td><?php echo $this->currencyFormat( $order->getDiscountAmount(), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php } ?>
+        <?php if ( $order->getShippingAmount() > 0 ) { ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Shippment'); ?></th>
+            <td><?php echo $this->currencyFormat( $order->getShippingAmount(), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php } ?>
+        <?php if ( $order->getTaxAmount() > 0 ) { ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Tax'); ?></th>
+            <td><?php echo $this->currencyFormat( $order->getTaxAmount(), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php } ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Grand total'); ?></th>
+            <th><?php echo $this->currencyFormat( $order->getOrderedAmount(), $order->getCurrency() ) ?></th>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php if ( $order->getPaidAmount() > 0 ) { ?>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Total paid'); ?></th>
+            <td><?php echo $this->currencyFormat( $order->getPaidAmount(), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+            <th><?php echo $this->translate('Total due'); ?></th>
+            <td><?php echo $this->currencyFormat( max( $order->getOrderedAmount() - $order->getPaidAmount(), 0), $order->getCurrency() ) ?></td>
+            <?php if ( $order->getState() == 'new' ) { ?><td>&nbsp;</td><?php } ?>
+        </tr>
+        <?php } ?>
+    </tfoot>
+</table>

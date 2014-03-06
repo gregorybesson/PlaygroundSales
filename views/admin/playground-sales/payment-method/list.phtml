@@ -1,0 +1,30 @@
+<?php $this->plugin('translate')->setTranslatorTextDomain('playgroundsales');// Pour le texte ?>
+<ul class="liste-buttons">
+    <li class="btn-admin"><a href="<?php echo $this->url('admin/sales/paymentmethod/add'); ?>"><?php echo $this->translate('Add a payment method'); ?></a></li>
+</ul>
+<h2><?php echo $this->translate('Payment method list') ?></h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th><?php echo $this->translate('Name') ?></th>
+            <th><?php echo $this->translate('Class name') ?></th>
+            <td><?php echo $this->translate('Actions') ?></td>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($this->paymentMethods as $paymentMethod):?>
+        <tr>
+            <td><?php echo $paymentMethod->getName(); ?></td>
+            <td><?php echo $paymentMethod->getClassName(); ?></td>
+            <td>
+                <a href='<?php echo $this->url('admin/sales/paymentmethod/edit', array('id' => $paymentMethod->getId())) ?>'><?php echo $this->translate('Edit'); ?></a>
+                <a href='<?php echo $this->url('admin/sales/paymentmethod/remove', array('id' => $paymentMethod->getId())) ?>'><?php echo $this->translate('Delete'); ?></a>
+            </td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
+<ul class="liste-buttons">
+    <li class="btn-admin"><a href="<?php echo $this->url('admin/sales/paymentmethod/add'); ?>"><?php echo $this->translate('Add a payment method'); ?></a></li>
+</ul>
+

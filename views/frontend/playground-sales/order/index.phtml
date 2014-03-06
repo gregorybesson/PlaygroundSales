@@ -1,0 +1,27 @@
+<?php
+$this->plugin('translate')->setTranslatorTextDomain('playgroundsales');
+?>
+<table class="table">
+    <thead>
+        <tr>
+            <th><?php echo $this->translate('Number'); ?></th>
+            <th><?php echo $this->translate('State'); ?></th>
+            <th><?php echo $this->translate('Grand total'); ?></th>
+            <th><?php echo $this->translate('Total paid'); ?></th>
+            <th><?php echo $this->translate('Total due'); ?></th>
+            <th><?php echo $this->translate('Actions'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach( $orders as $order ) { ?>
+        <tr>
+            <td><?php echo $order->getId(); ?></td>
+            <td><?php echo $this->translate($order->getState()); ?></td>
+            <td><?php echo $this->currencyFormat( $order->getOrderedAmount(), $order->getCurrency() ); ?></td>
+            <td><?php echo $this->currencyFormat( $order->getPaidAmount(), $order->getCurrency() ); ?></td>
+            <td><?php echo $this->currencyFormat( max( $order->getOrderedAmount() - $order->getPaidAmount(), 0), $order->getCurrency() ); ?></td>
+            <td><a href="<?php echo $this->url('frontend/order/show',array('id'=>$order->getId(),'channel'=>$channel)); ?>"><?php echo $this->translate('Show'); ?></a></td>
+        </tr>
+<?php }?>
+    </tbody>
+</table>

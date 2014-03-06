@@ -1,0 +1,114 @@
+<?php
+$this->plugin('translate')->setTranslatorTextDomain('playgroundsales');
+$form = $this->form;
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+?>
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#billing" data-toggle="tab"><?php echo $this->translate('Billing'); ?></a></li>
+        <li><a href="#shipping" data-toggle="tab"><?php echo $this->translate('Shipping'); ?></a></li>
+        <li><a href="#shipping-method" data-toggle="tab"><?php echo $this->translate('Shipping method'); ?></a></li>
+        <li><a href="#payment-method" data-toggle="tab"><?php echo $this->translate('Payment method'); ?></a></li>
+        <li><a href="#review" data-toggle="tab"><?php echo $this->translate('Review'); ?></a></li>
+    </ul>
+    <fieldset id="billing" class="active">
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_first_name')); ?>
+            <?php echo $this->formInput($form->get('billing_first_name')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_first_name')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_last_name')); ?>
+            <?php echo $this->formInput($form->get('billing_last_name')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_last_name')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_email')); ?>
+            <?php echo $this->formInput($form->get('billing_email')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_email')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_address')); ?>
+            <?php echo $this->formTextarea($form->get('billing_address')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_address')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_zip_code')); ?>
+            <?php echo $this->formInput($form->get('billing_zip_code')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_zip_code')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_country')); ?>
+            <?php echo $this->formSelect($form->get('billing_country')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_country')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('billing_phone')); ?>
+            <?php echo $this->formInput($form->get('billing_phone')); ?>
+            <?php echo $this->formElementErrors($form->get('billing_phone')); ?>
+        </div>
+    </fieldset>
+    <fieldset id="shipping">
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_first_name')); ?>
+            <?php echo $this->formInput($form->get('shipping_first_name')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_first_name')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_last_name')); ?>
+            <?php echo $this->formInput($form->get('shipping_last_name')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_last_name')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_email')); ?>
+            <?php echo $this->formInput($form->get('shipping_email')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_email')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_address')); ?>
+            <?php echo $this->formTextarea($form->get('shipping_address')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_address')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_zip_code')); ?>
+            <?php echo $this->formInput($form->get('shipping_zip_code')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_zip_code')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_country')); ?>
+            <?php echo $this->formSelect($form->get('shipping_country')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_country')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_phone')); ?>
+            <?php echo $this->formInput($form->get('shipping_phone')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_phone')); ?>
+        </div>
+    </fieldset>
+    <fieldset id="shipping-method">
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('shipping_method')); ?>
+            <?php echo $this->formSelect($form->get('shipping_method')); ?>
+            <?php echo $this->formElementErrors($form->get('shipping_method')); ?>
+        </div>
+    </fieldset>
+    <fieldset id="payment-method">
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('payment_method')); ?>
+            <?php echo $this->formSelect($form->get('payment_method')); ?>
+            <?php echo $this->formElementErrors($form->get('payment_method')); ?>
+        </div>
+    </fieldset>
+    <fieldset id="review">
+        <?php echo $this->partial('playground-sales/items', array('order' => $order)); ?>
+        <?php echo $this->formButton($form->get('submit')); ?>
+    </fieldset>
+<?php echo $this->form()->closeTag(); ?>
+<script type="text/javascript">
+//<![CDATA[
+jQuery(document).ready(function ($) {
+	jQuery('#tabs').tab();
+});
+//]]>
+</script>

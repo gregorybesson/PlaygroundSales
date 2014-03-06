@@ -1,0 +1,34 @@
+{
+	"name" : "playground/sales",
+	"description" : "Sales module",
+	"type" : "library",
+	"authors" : [{
+			"name" : "Alexandre Beaurain",
+			"email" : "alexandre.beaurain@adfab.fr",
+			"homepage" : "http://www.playground.gg"
+		}
+	],
+	"keywords" : [
+		"zf2",
+		"playground",
+		"sales",
+		"order",
+		"checkout"
+	],
+	"homepage" : "https://github.com/gregorybesson/PlaygroundSales",
+	"license" : "BSD-3-Clause",
+	"minimum-stability" : "dev",
+	"require" : {
+		"playground/catalog" : "dev-develop",
+		"playground/wallet" : "dev-develop",
+		"omnipay/paypal" : "dev-master"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "3.7.*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"PlaygroundSales" : "src/"
+		}
+	}
+}

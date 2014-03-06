@@ -1,0 +1,30 @@
+<?php
+$this->plugin('translate')->setTranslatorTextDomain('playgroundsales');
+?>
+
+<?php echo $this->translate('Number') ?> : <?php echo $order->getId(); ?>
+<?php echo $this->translate('State') ?> : <?php echo $this->translate($order->getState()); ?>
+<?php echo $this->translate('Addresses') ?> : 
+<ul class="addresses">
+<?php foreach( $order->getAddresses() as $address ) {?>
+    <li class="<?php $address->getType() ?>">
+        <?php echo $this->translate(ucfirst($address->getType())) ?>
+        <?php echo $address->getAddress() ?>
+        <?php echo $address->getZipCode() ?>
+        <?php echo $address->getCity() ?>
+        <?php echo $address->getCountry() ?>
+    </li>
+<?php }?>
+</ul>
+
+<?php echo $this->translate('Payments') ?> : 
+<ul class="payments">
+<?php foreach( $order->getPayments() as $payment ) {?>
+    <li>
+        <?php echo $payment->getPaymentMethod()->getName(); ?>
+        <?php echo $this->currencyFormat( $payment->getAmount(), $payment->getCurrency() ) ?>
+    </li>
+<?php }?>
+</ul>
+
+<?php echo $this->partial('playground-sales/items', array('order' => $order)); ?>

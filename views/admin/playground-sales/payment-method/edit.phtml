@@ -1,0 +1,36 @@
+<?php
+$this->plugin('translate')->setTranslatorTextDomain('playgroundsales');
+$form = $this->form;
+$form->prepare();
+?>
+
+<?php echo $this->form()->openTag($form) ?>
+    <?php echo $this->formHidden($form->get('id')); ?>
+    <fieldset>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('className')); ?>
+            <?php echo $this->formSelect($form->get('className')); ?>
+            <?php echo $this->formElementErrors($form->get('className')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('name')); ?>
+            <?php echo $this->formInput($form->get('name')); ?>
+            <?php echo $this->formElementErrors($form->get('name')); ?>
+        </div>
+        <div class="label-input">
+            <?php echo $this->formLabel($form->get('valid')); ?>
+            <?php echo $this->formCheckbox($form->get('valid')); ?>
+            <?php echo $this->formElementErrors($form->get('valid')); ?>
+        </div>
+    <?php foreach($form->get('paymentMethodParameters') as $key => $element):?>
+        <?php echo $this->formHidden($element->get('id')); ?>
+        <?php echo $this->formHidden($element->get('name')); ?>
+        <div class="label-input">
+            <label><?php echo $this->translate('Parameter : ').$element->get('name')->getValue(); ?></label>
+            <?php echo $this->formInput($element->get('value')); ?>
+            <?php echo $this->formElementErrors($element->get('value')); ?>
+        </div>
+    <?php endforeach;?>
+    </fieldset>
+<?php echo $this->formButton($form->get('submit')); ?>
+<?php echo $this->form()->closeTag();
